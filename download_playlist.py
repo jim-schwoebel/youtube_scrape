@@ -2,12 +2,14 @@
 Extract playlist URLs
 (for further processing)
 '''
-import requests, json 
+import requests, json, os 
 from bs4 import BeautifulSoup
 from pytube import YouTube
 
 base='https://www.youtube.com/watch?v='
 
+playlist_name=input('what do you want to name this playlist (e.g. angry)?')
+#angry
 playlist=input('what is the playlist url?')
 #https://www.youtube.com/playlist?list=PL1v-PVIZFDsqbzPIsEPZPnvcgIQ8bNTKS
 page=requests.get(playlist)
@@ -52,6 +54,8 @@ for i in range(len(g)):
     except:
         print('error')
 
+os.mkdir(playlist_name)
+os.chdir(os.getcwd()+'/'+playlist_name)
 
 data={
     'entrynum':len(entries),
@@ -71,4 +75,14 @@ for i in range(len(entries)):
         YouTube(link).streams.first().download()
     except:
         print('error')
+
+# rename videos in order
+listdir=os.listdir()
+for i in range(len(listdir)):
+    if listdir[i][-5:] in ['.webm']:
+        os.rename(listdir[i],str(i)+'.webm')
+        os.system('ffmpeg -i %s %s'%(str(i)+'.webm',str(i)+'.mp4'))
+        os.remove(str(i)+'.webm')
+    elif listdir[i][-4:] in ['.mp4']:
+        os.rename(listdir[i],str(i)+'mp4')
     
