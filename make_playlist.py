@@ -13,14 +13,13 @@ from pytube import YouTube
 ###########################################################################
 #                       HELPER FUNCTIONS                                ##
 ###########################################################################
-def scrapelinks(playlist):
+def scrapelinks(playlist, links):
     #https://www.youtube.com/playlist?list=PL1v-PVIZFDsqbzPIsEPZPnvcgIQ8bNTKS
     page=requests.get(playlist)
     soup=BeautifulSoup(page.content, 'lxml')
 
     g=soup.find_all('tr',class_='pl-video yt-uix-tile ')
     entries=list()
-    links=list()
     totaltime=0
 
     for i in range(len(g)):
@@ -62,7 +61,7 @@ def scrapelinks(playlist):
         except:
             print('error')
 
-    return entries, len(entries), totaltime
+    return entries, len(entries), totaltime, links
 
 ###########################################################################
 ##                          MAIN CODE BASE                               ##
@@ -75,28 +74,29 @@ entries=list()
 t=1
 totalnum=0
 totaltime=0
+links=list()
 
 playlist_name=input('what do you want to name this playlist (e.g. angry)?')
 
 while t>0:
+    
+    #try:
 
-    try:
+    playlist=input('what is the playlist id?')
+    if playlist not in ['', 'n']:
+        playlist='https://www.youtube.com/playlist?list='+playlist
+        playlists.append(playlist)
+        entry, enum, nowtime, link=scrapelinks(playlist, links)
+        links=links+link 
+        totalnum=totalnum+enum
+        totaltime=totaltime+nowtime 
+        entries=entries+entry
+    else:
+        break
 
-        playlist=input('what is the playlist id?')
-        if playlist not in ['', 'n']:
-            playlist='https://www.youtube.com/playlist?list='+playlist
-            playlists.append(playlist)
-            entry, enum, nowtime=scrapelinks(playlist)
-            totalnum=totalnum+enum
-            totaltime=totaltime+nowtime 
-            entries=entries+entry
+    #except:
 
-        else:
-            break
-
-    except:
-
-        print('error') 
+        #print('error') 
 
 os.mkdir(playlist_name)
 os.chdir(os.getcwd()+'/'+playlist_name)
