@@ -15,7 +15,7 @@ To make a playlist:
     what is the playlist id?
     ...
 
-This then makes a playlist from all the playlist ids. 
+This then makes a playlist from all the playlist ids. Note that only the first 100 in each playlist will be added to the playlist. Also, don't worry about duplicate video links in similar playlists (e.g. cnn videos); we take care of this by making sure no duplicate links go into the playlist. 
 
 # downloading playlists generated 
 
