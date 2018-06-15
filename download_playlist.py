@@ -43,13 +43,18 @@ for i in range(len(g)):
         duration=int(hmin[0])*60+int(hmin[1])
         totaltime=totaltime+duration
 
-        entry={
-            'title':title,
-            'link':link,
-            'duration':duration
-            }
-        
-        entries.append(entry)
+        if link not in links:
+
+            # avoids duplicate links 
+            links.append(link)
+
+            entry={
+                'title':title,
+                'link':link,
+                'duration':duration
+                }
+            
+            entries.append(entry)
 
     except:
         print('error')
