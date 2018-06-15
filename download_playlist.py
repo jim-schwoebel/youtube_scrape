@@ -18,28 +18,28 @@ for i in range(len(entries)):
     link=entries[i]['link']
     links.append(link)
 
-# # download files 
-# for i in range(len(links)):
-#     try:
-#         link=links[i]
-#         print('downloading %s'%(link))
-#         YouTube(link).streams.first().download()
-#     except:
-#         print('error')
+# download files 
+for i in range(len(links)):
+    try:
+        link=links[i]
+        print('downloading %s'%(link))
+        YouTube(link).streams.first().download()
+    except:
+        print('error')
 
-# # rename videos in order
-# listdir=os.listdir()
-# for i in range(len(listdir)):
-#     if listdir[i][-5:] in ['.webm']:
-#         os.rename(listdir[i],str(i)+'.webm')
-#         os.system('ffmpeg -i %s %s'%(str(i)+'.webm',str(i)+'.mp4'))
-#         os.remove(str(i)+'.webm')
-#     elif listdir[i][-4:] in ['.mp4']:
-#         os.rename(listdir[i],str(i)+'.mp4')
+# rename videos in order
+listdir=os.listdir()
+for i in range(len(listdir)):
+    if listdir[i][-5:] in ['.webm']:
+        os.rename(listdir[i],str(i)+'.webm')
+        os.system('ffmpeg -i %s %s'%(str(i)+'.webm',str(i)+'.mp4'))
+        os.remove(str(i)+'.webm')
+    elif listdir[i][-4:] in ['.mp4']:
+        os.rename(listdir[i],str(i)+'.mp4')
 
-# # now make audio for each .mp4 file 
-# listdir=os.listdir()
+# now make audio for each .mp4 file 
+listdir=os.listdir()
 
-# for i in range(len(listdir)):
-#     if listdir[i][-4:]=='.mp4':
-#         os.system('ffmpeg -i %s %s'%(listdir[i],listdir[i][0:-4]+'.wav'))
+for i in range(len(listdir)):
+    if listdir[i][-4:]=='.mp4':
+        os.system('ffmpeg -i %s %s'%(listdir[i],listdir[i][0:-4]+'.wav'))
