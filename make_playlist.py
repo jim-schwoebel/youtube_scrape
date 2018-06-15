@@ -16,6 +16,7 @@ from pytube import YouTube
 def scrapelinks(playlist, links):
     #https://www.youtube.com/playlist?list=PL1v-PVIZFDsqbzPIsEPZPnvcgIQ8bNTKS
     page=requests.get(playlist)
+    base='https://www.youtube.com/watch?v='
     soup=BeautifulSoup(page.content, 'lxml')
 
     g=soup.find_all('tr',class_='pl-video yt-uix-tile ')
@@ -67,8 +68,6 @@ def scrapelinks(playlist, links):
 ##                          MAIN CODE BASE                               ##
 ###########################################################################
 
-base='https://www.youtube.com/watch?v='
-
 playlists=list()
 entries=list()
 t=1
@@ -102,7 +101,7 @@ os.mkdir(playlist_name)
 os.chdir(os.getcwd()+'/'+playlist_name)
 
 data={
-    'entrynum':totanum,
+    'entrynum':totalnum,
     'total time':totaltime,
     'playlist url':playlists,
     'entries':entries,
