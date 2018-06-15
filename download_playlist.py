@@ -1,6 +1,11 @@
 '''
-Extract playlist URLs
-(for further processing)
+download_playlist.py
+
+Download a playlist from the URLS previously generated
+with make_playlist.py script.
+
+Note: make sure you have at least around 10GB of disk space
+before bulk downloading videos, as they can take up a lot of space.
 '''
 import requests, json, os 
 from bs4 import BeautifulSoup
