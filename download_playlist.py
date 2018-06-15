@@ -89,5 +89,5 @@ for i in range(len(listdir)):
         os.system('ffmpeg -i %s %s'%(str(i)+'.webm',str(i)+'.mp4'))
         os.remove(str(i)+'.webm')
     elif listdir[i][-4:] in ['.mp4']:
-        os.rename(listdir[i],str(i)+'mp4')
+        os.rename(listdir[i],str(i)+'.mp4')
     
