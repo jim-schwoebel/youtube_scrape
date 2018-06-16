@@ -25,7 +25,7 @@ Once you make a playlist, you can easily download it by:
     cd youtube_scrape
     python3 download_playlist.py 
     
- Thie will then download the playlist and format it according to the style needed to train emotion detection models with train_emotions library.
+This will then download the playlist and format it according to the style needed to train emotion detection models with train_emotions library.
  
  # references
  * [pytube](https://github.com/nficano/pytube)
