@@ -23,7 +23,7 @@ Note that playlist IDs are readily accessible on YouTube as the id part of the U
 
 You don't need to necessarily put in the playlist ID for this script to work; you can also put the full playlist URL (e.g. https://www.youtube.com/playlist?list=PL1v-PVIZFDsqbzPIsEPZPnvcgIQ8bNTKS). 
 
-Also, only the first 100 in each playlist will be added to the master playlist. Don't worry about duplicate video links in similar playlists (e.g. cnn videos); we take care of this by making sure no duplicate links go into the playlist. 
+Also, only the first 100 in each playlist will be added to the master playlist. Don't worry about duplicate video links in similar playlists (e.g. cnn videos); the script takes care of this by making sure no duplicate links go into the playlist. 
 
 ## downloading playlists generated 
 
