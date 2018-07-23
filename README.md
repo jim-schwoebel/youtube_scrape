@@ -1,5 +1,5 @@
 # youtube_scrape
-Internal library for scraping youtube videos. Alternative to pafy, pytube, and youtube-dl. 
+This is an internal library for building playlists and scraping youtube videos. 
 
 Insert the youtube playlist name and url and download to folder. Then, convert all videos to .mp4 format for further processing.
 
@@ -29,3 +29,4 @@ This will then download the playlist and format it according to the style needed
  
  # references
  * [pytube](https://github.com/nficano/pytube)
+ * [youtubedl](https://rg3.github.io/youtube-dl/)
