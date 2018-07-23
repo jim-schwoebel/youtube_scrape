@@ -1,5 +1,7 @@
 '''
 download_playlist.py
+Author: Jim Schwoebel
+License: Apache 2.0 license.
 
 Download a playlist from the URLS previously generated
 with make_playlist.py script.
