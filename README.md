@@ -1,9 +1,9 @@
 # youtube_scrape
 This is a library for building playlists and scraping youtube videos. 
 
-Insert the youtube playlist name and url and download to folder. Then, it converts all videos to .mp4 format for further processing.
+All you need to do is insert the youtube playlist name and url and it will download the playlist to a folder. All videos are converted to .mp4 format for further processing.
 
-This is good for emotional labels (angry, happy, sad, etc.) to be further processed, or just any video with sounds that we'd like to look further into. 
+This script is good for labeling videos on YouTube (angry, happy, sad, etc.) to be further processed by machine learning models.
 
 ## making playlists
 
