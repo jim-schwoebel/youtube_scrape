@@ -15,8 +15,8 @@ To begin making a playlist:
     what is the playlist id or URL?
     ...
 
-Also, if you stop building your playlist and have it written to json by typing in nothing ('') or 'n'. 
-This then makes a playlist from all the playlist ids. 
+Also, you can stop building your playlist and have it written to json by typing in nothing ('') or 'n'. 
+The make_playlist.py script then makes a playlist from all the playlist ids or URLs that you have entered.
 
 ### what is the playlist ID?
 Note that playlist IDs are readily accessible on YouTube as the id part of the URL. For example, https://www.youtube.com/watch?v=xPU8OAjjS4k&list=PLpoUYdDxb6P56t8lnxnA412k_H5EMHd-8 --> Playlist id is PLpoUYdDxb6P56t8lnxnA412k_H5EMHd-8. 
