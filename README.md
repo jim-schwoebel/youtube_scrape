@@ -5,9 +5,9 @@ Insert the youtube playlist name and url and download to folder. Then, convert a
 
 This is good for emotional labels (angry, happy, sad, etc.) to be further processed, or just any video with sounds that we'd like to look further into. 
 
-# making playlists
+## making playlists
 
-To make a playlist:
+To begin making a playlist:
     
     cd ~
     cd youtube_scrape 
@@ -15,13 +15,15 @@ To make a playlist:
     what is the playlist id?
     ...
 
-Note that playlist IDs are readily accessible on YouTube as the id part of the URL. For example, https://www.youtube.com/watch?v=xPU8OAjjS4k&list=PLpoUYdDxb6P56t8lnxnA412k_H5EMHd-8 --> Playlist id is PLpoUYdDxb6P56t8lnxnA412k_H5EMHd-8. Also, only the first 100 in each playlist will be added to the master playlist. Don't worry about duplicate video links in similar playlists (e.g. cnn videos); we take care of this by making sure no duplicate links go into the playlist. 
-
 Also, if you stop building your playlist and have it written to json by typing in nothing ('') or 'n'. 
-
 This then makes a playlist from all the playlist ids. 
 
-# downloading playlists generated 
+### what is the playlist ID?
+Note that playlist IDs are readily accessible on YouTube as the id part of the URL. For example, https://www.youtube.com/watch?v=xPU8OAjjS4k&list=PLpoUYdDxb6P56t8lnxnA412k_H5EMHd-8 --> Playlist id is PLpoUYdDxb6P56t8lnxnA412k_H5EMHd-8. 
+
+Also, only the first 100 in each playlist will be added to the master playlist. Don't worry about duplicate video links in similar playlists (e.g. cnn videos); we take care of this by making sure no duplicate links go into the playlist. 
+
+## downloading playlists generated 
 
 Once you make a playlist, you can easily download it by:
 
@@ -29,7 +31,7 @@ Once you make a playlist, you can easily download it by:
     cd youtube_scrape
     python3 download_playlist.py 
     
-This will then download the playlist and format it according to the style needed to train emotion detection models with train_emotions library.
+This will then download the playlist and format it according to the style needed to train machine learning models.
  
  # references
  * [pytube](https://github.com/nficano/pytube)
