@@ -130,8 +130,15 @@ while t>0:
     
     #try:
 
-    playlist=input('what is the playlist id?')
-    if playlist not in ['', 'n']:
+    playlist=input('what is the playlist id or URL?')
+    if playlist.find('playlist?list=')>0:
+        playlists.append(playlist)
+        entry, enum, nowtime, link=scrapelinks(playlist, links)
+        links=links+link 
+        totalnum=totalnum+enum
+        totaltime=totaltime+nowtime 
+        entries=entries+entry
+    elif playlist not in ['', 'n']:
         playlist='https://www.youtube.com/playlist?list='+playlist
         playlists.append(playlist)
         entry, enum, nowtime, link=scrapelinks(playlist, links)
@@ -146,8 +153,7 @@ while t>0:
 
         #print('error') 
 
-os.mkdir(playlist_name)
-os.chdir(os.getcwd()+'/'+playlist_name)
+os.chdir(os.getcwd()+'/playlists')
 
 data={
     'entrynum':totalnum,
