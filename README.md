@@ -12,14 +12,14 @@ To begin making a playlist:
     cd ~
     cd youtube_scrape 
     python3 make_playlist.py
-    what is the playlist id?
+    what is the playlist id or URL?
     ...
 
 Also, if you stop building your playlist and have it written to json by typing in nothing ('') or 'n'. 
 This then makes a playlist from all the playlist ids. 
 
 ### what is the playlist ID?
-Note that playlist IDs are readily accessible on YouTube as the id part of the URL. For example, https://www.youtube.com/watch?v=xPU8OAjjS4k&list=PLpoUYdDxb6P56t8lnxnA412k_H5EMHd-8 --> Playlist id is PLpoUYdDxb6P56t8lnxnA412k_H5EMHd-8. 
+Note that playlist IDs are readily accessible on YouTube as the id part of the URL. For example, https://www.youtube.com/watch?v=xPU8OAjjS4k&list=PLpoUYdDxb6P56t8lnxnA412k_H5EMHd-8 --> Playlist id is PLpoUYdDxb6P56t8lnxnA412k_H5EMHd-8. You don't need to necessarily put in the playlist ID, you can also put the full playlist URL (e.g. https://www.youtube.com/playlist?list=PL1v-PVIZFDsqbzPIsEPZPnvcgIQ8bNTKS). 
 
 Also, only the first 100 in each playlist will be added to the master playlist. Don't worry about duplicate video links in similar playlists (e.g. cnn videos); we take care of this by making sure no duplicate links go into the playlist. 
 
