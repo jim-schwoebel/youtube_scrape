@@ -33,7 +33,10 @@ Once you make a playlist, you can easily download it by:
     cd youtube_scrape
     python3 download_playlist.py 
     
-This will then download the playlist and format it according to the style needed to train machine learning models.
+You can then state the playlist in the /playlists folder that you'd like to download as either the name or .JSON file (e.g. 
+yc_podcast or yc_podcast.json will work). 
+
+The script will then download the playlist and format it according to the style needed to train machine learning models.
  
  # references
  * [pytube](https://github.com/nficano/pytube)
