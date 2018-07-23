@@ -15,7 +15,11 @@ To make a playlist:
     what is the playlist id?
     ...
 
-This then makes a playlist from all the playlist ids. Note that only the first 100 in each playlist will be added to the playlist. Also, don't worry about duplicate video links in similar playlists (e.g. cnn videos); we take care of this by making sure no duplicate links go into the playlist. 
+Note that playlist IDs are readily accessible on YouTube as the id part of the URL. For example, https://www.youtube.com/watch?v=xPU8OAjjS4k&list=PLpoUYdDxb6P56t8lnxnA412k_H5EMHd-8 --> Playlist id is PLpoUYdDxb6P56t8lnxnA412k_H5EMHd-8. Also, only the first 100 in each playlist will be added to the master playlist. Don't worry about duplicate video links in similar playlists (e.g. cnn videos); we take care of this by making sure no duplicate links go into the playlist. 
+
+Also, if you stop building your playlist and have it written to json by typing in nothing ('') or 'n'. 
+
+This then makes a playlist from all the playlist ids. 
 
 # downloading playlists generated 
 
