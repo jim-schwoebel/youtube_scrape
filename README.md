@@ -1,5 +1,5 @@
 # youtube_scrape
-This is an internal library for building playlists and scraping youtube videos. 
+This is a library for building playlists and scraping youtube videos. 
 
 Insert the youtube playlist name and url and download to folder. Then, convert all videos to .mp4 format for further processing.
 
