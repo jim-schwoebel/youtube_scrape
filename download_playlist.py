@@ -66,7 +66,7 @@ import requests, json, os
 from bs4 import BeautifulSoup
 from pytube import YouTube
 
-playlist_name=input('what is the name of the playlist?')
+playlist_name=input('what is the name of the playlist to download?')
 hostdir=os.getcwd()
 os.chdir(os.getcwd()+'/playlists/')
 
