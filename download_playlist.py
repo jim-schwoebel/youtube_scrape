@@ -70,24 +70,22 @@ playlist_name=input('what is the name of the playlist to download?')
 hostdir=os.getcwd()
 os.chdir(os.getcwd()+'/playlists/')
 
-g='error'
-while g not in ['error']:
-    try:
-        if playlist_name[-5:] != '.json':
-            g=json.load(open(playlist_name+'.json'))
-            entries=g['entries']
-            links=list()
-        elif playlist_name[-5:] == '.json':
-            g=json.load(open(playlist_name))
-            entries=g['entries']
-            links=list() 
-    except:
-        g='error'
-        print('error loading playlist. Please make sure it is in the playlists folder and you type in the name properly. \n\n For example yc_podcast.json ==> yc_podcast or yc_podcast.json')
+try:
+    if playlist_name[-5:] != '.json':
+        g=json.load(open(playlist_name+'.json'))
+        entries=g['entries']
+        links=list()
+    elif playlist_name[-5:] == '.json':
+        g=json.load(open(playlist_name))
+        entries=g['entries']
+        links=list() 
+except:
+    print('error loading playlist. Please make sure it is in the playlists folder and you type in the name properly. \n\n For example yc_podcast.json ==> yc_podcast or yc_podcast.json')
 
 for i in range(len(entries)):
     link=entries[i]['link']
     links.append(link)
+    print(link)
 
 # download files 
 for i in range(len(links)):
