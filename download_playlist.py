@@ -62,7 +62,7 @@ Make sure you have at least around 10GB of disk space
 before bulk downloading videos, as they can take up a lot of space.
 
 '''
-import requests, json, os 
+import requests, json, os, shutil
 from bs4 import BeautifulSoup
 from pytube import YouTube
 
@@ -81,6 +81,20 @@ try:
         links=list() 
 except:
     print('error loading playlist. Please make sure it is in the playlists folder and you type in the name properly. \n\n For example yc_podcast.json ==> yc_podcast or yc_podcast.json')
+
+if playlist_name[-5:]=='.json':
+    foldername=playlist_name[0:-5]
+else:
+    foldername=playlist_name
+    foldername
+try:
+    os.mkdir(foldername)
+    os.chdir(foldername)
+except:
+    shutil.rmtree(foldername)
+    os.mkdir(foldername)
+    
+    os.chdir(foldername)
 
 for i in range(len(entries)):
     link=entries[i]['link']
