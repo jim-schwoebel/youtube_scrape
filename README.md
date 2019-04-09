@@ -41,7 +41,7 @@ yc_podcast or yc_podcast.json will work).
 The script will then download the playlist and format it according to the style needed to train machine learning models.
 
 ## Feedback
-Any feedback on the book or this repository is greatly appreciated. 
+Any feedback on this repository is greatly appreciated. 
 * If you find something that is missing or doesn't work, please consider opening a [GitHub issue](https://github.com/jim-schwoebel/youtube_scrape/issues).
 * If you'd like to be mentored by someone on our team, check out the [Innovation Fellows Program](http://neurolex.ai/research).
 * If you want to talk to me directly, please send me an email @ js@neurolex.co. 
