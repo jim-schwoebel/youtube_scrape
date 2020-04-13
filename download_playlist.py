@@ -66,6 +66,29 @@ import requests, json, os, shutil
 from bs4 import BeautifulSoup
 from pytube import YouTube
 
+def download_audio(link):
+    listdir=os.listdir()
+    setting='video'
+    
+    if setting == 'audio':
+        os.system("youtube-dl -f 'bestaudio[ext=m4a]' '%s'"%(link))
+        listdir2=os.listdir()
+        filename=''
+        for i in range(len(listdir2)):
+            if listdir2[i] not in listdir and listdir2[i].endswith('.m4a'):
+                filename=listdir2[i]
+                break
+    elif setting == 'video':
+        os.system("youtube-dl -f 'bestvideo[ext=mp4]' '%s'"%(link))
+        listdir2=os.listdir()
+        filename=''
+        for i in range(len(listdir2)):
+            if listdir2[i] not in listdir and listdir2[i].endswith('.mp4'):
+                filename=listdir2[i]
+                break
+
+    return filename
+
 playlist_name=input('what is the name of the playlist to download?')
 hostdir=os.getcwd()
 os.chdir(os.getcwd()+'/playlists/')
@@ -106,7 +129,8 @@ for i in range(len(links)):
     try:
         link=links[i]
         print('downloading %s'%(link))
-        YouTube(link).streams.first().download()
+        filename=download_audio(link)
+        extension='.mp4'
     except:
         print('error')
 
