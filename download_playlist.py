@@ -62,91 +62,54 @@ Make sure you have at least around 10GB of disk space
 before bulk downloading videos, as they can take up a lot of space.
 
 '''
-import requests, json, os, shutil
+import requests, json, os, time 
 from bs4 import BeautifulSoup
 from pytube import YouTube
+import uuid, shutil
+ 
+def scrapelinks(playlistid):
+    print(playlistid)
+    os.system('youtube-dl --rm-cache-dir')
+    os.system('youtube-dl --extract-audio --audio-format wav --yes-playlist "%s" --sleep-interval 10'%(playlistid))
 
-def download_audio(link):
-    listdir=os.listdir()
-    setting='video'
-    
-    if setting == 'audio':
-        os.system("youtube-dl -f 'bestaudio[ext=m4a]' '%s'"%(link))
-        listdir2=os.listdir()
-        filename=''
-        for i in range(len(listdir2)):
-            if listdir2[i] not in listdir and listdir2[i].endswith('.m4a'):
-                filename=listdir2[i]
-                break
-    elif setting == 'video':
-        os.system("youtube-dl -f 'bestvideo[ext=mp4]' '%s'"%(link))
-        listdir2=os.listdir()
-        filename=''
-        for i in range(len(listdir2)):
-            if listdir2[i] not in listdir and listdir2[i].endswith('.mp4'):
-                filename=listdir2[i]
-                break
+os.chdir('playlists')
+print('Which playlist would you like to download?')
+print('-----------------')
+listdir=os.listdir()
+for playlist in listdir:
+    print(playlist)
+print('-----------------')
+playlist=input('?????? (include .json - e.g. jim.json) ????????\n')
 
-    return filename
-
-playlist_name=input('what is the name of the playlist to download?')
-hostdir=os.getcwd()
-os.chdir(os.getcwd()+'/playlists/')
-
-try:
-    if playlist_name[-5:] != '.json':
-        g=json.load(open(playlist_name+'.json'))
-        entries=g['entries']
-        links=list()
-    elif playlist_name[-5:] == '.json':
-        g=json.load(open(playlist_name))
-        entries=g['entries']
-        links=list() 
-except:
-    print('error loading playlist. Please make sure it is in the playlists folder and you type in the name properly. \n\n For example yc_podcast.json ==> yc_podcast or yc_podcast.json')
-
-if playlist_name[-5:]=='.json':
-    foldername=playlist_name[0:-5]
+if playlist not in listdir:
+    print('ERROR - playlist does not exist')
 else:
-    foldername=playlist_name
-    foldername
-try:
-    os.mkdir(foldername)
-    os.chdir(foldername)
-except:
-    shutil.rmtree(foldername)
-    os.mkdir(foldername)
-    
-    os.chdir(foldername)
-
-for i in range(len(entries)):
-    link=entries[i]['link']
-    links.append(link)
-    print(link)
-
-# download files 
-for i in range(len(links)):
+    playlistname=playlist.replace('.json','')
+    load=json.load(open(playlist))['playlist url']
     try:
-        link=links[i]
-        print('downloading %s'%(link))
-        filename=download_audio(link)
-        extension='.mp4'
+        os.mkdir(playlistname)
+        os.chdir(playlistname)
     except:
-        print('error')
+        shutil.rmtree(playlistname)
+        os.mkdir(playlistname)
+        os.chdir(playlistname)    
+    
+    for urls in load:
+        playlistid_index=urls.find('list=')
+        playlistid=urls[(playlistid_index+5):]
+        scrapelinks(playlistid)
 
-# rename videos in order
-listdir=os.listdir()
-for i in range(len(listdir)):
-    if listdir[i][-5:] in ['.webm']:
-        os.rename(listdir[i],str(i)+'.webm')
-        os.system('ffmpeg -i %s %s'%(str(i)+'.webm',str(i)+'.mp4'))
-        os.remove(str(i)+'.webm')
-    elif listdir[i][-4:] in ['.mp4']:
-        os.rename(listdir[i],str(i)+'.mp4')
+    # now convert all the files with new names
+    listdir=os.listdir()
+    for file in listdir:
+        if file.endswith('.wav'):
+            os.rename(file, str(uuid.uuid4())+'.wav')
+        else:
+            os.remove(file)
 
-# now make audio for each .mp4 file 
-listdir=os.listdir()
-
-for i in range(len(listdir)):
-    if listdir[i][-4:]=='.mp4':
-        os.system('ffmpeg -i %s %s'%(listdir[i],listdir[i][0:-4]+'.wav'))
+    # now convert everything to mono 16000 Hz 
+    listdir=os.listdir()
+    for file in listdir:
+        if file.endswith('.wav'):
+            os.system('ffmpeg -i %s -acodec pcm_s16le -ac 1 -ar 16000 %s -y'%(file, 'cleaned_'+file))
+            os.remove(file)

@@ -61,48 +61,8 @@ from pytube import YouTube
 ###########################################################################
 #                       HELPER FUNCTIONS                                ##
 ###########################################################################
-def scrapelinks(playlist, links):
-    #https://www.youtube.com/playlist?list=PL1v-PVIZFDsqbzPIsEPZPnvcgIQ8bNTKS
-    page=requests.get(playlist)
-    base='https://www.youtube.com/watch?v='
-    soup=BeautifulSoup(page.content, 'lxml')
-    print(soup)
-    g=soup.find_all('tr',class_='pl-video yt-uix-tile')
-    entries=list()
-    totaltime=0
-    print(g)
-    # time.sleep(50)
-    for i in range(len(g)):
-        try:
-            h=str(g[i])
-            # get titles
-            h1=h.find('data-title="')+len('data-title="')
-            h2=h[h1:].find('"')
-            title=h[h1:h1+h2]
-            # get links
-            h3=h.find('data-video-id="')+len('data-video-id="')
-            h4=h[h3:].find('"')
-            link=base+h[h3:h3+h4]
-            # get duration (in seconds)
-            h5=h.find('<div class="timestamp"><span aria-label="')
-            h6=h[h5:]
-            hsoup=BeautifulSoup(h6,'lxml')
-            htext=hsoup.text.replace('\n','').replace(' ','')
-            hmin=htext.split(':')
-            duration=int(hmin[0])*60+int(hmin[1])
-            totaltime=totaltime+duration
-            if link not in links:
-                # avoids duplicate links 
-                links.append(link)
-                entry={
-                    'title':title,
-                    'link':link,
-                    'duration':duration
-                    }
-                entries.append(entry)
-        except:
-            print('error')
-    return entries, len(entries), totaltime, links
+def scrapelinks(playlistid):
+    os.system('youtube-dl -i %s'%(playlistid))
 
 ###########################################################################
 ##                          MAIN CODE BASE                               ##
@@ -123,20 +83,15 @@ while t>0:
 
         playlist=input('what is the playlist id or URL?')
         if playlist.find('playlist?list=')>0:
+            index_=playlist.find('playlist?list=')
+            playlistid=playlist[index_:]
             playlists.append(playlist)
-            entry, enum, nowtime, link=scrapelinks(playlist, links)
-            links=links+link 
-            totalnum=totalnum+enum
-            totaltime=totaltime+nowtime 
-            entries=entries+entry
+            
         elif playlist not in ['', 'n']:
+            playlistid=playlist
             playlist='https://www.youtube.com/playlist?list='+playlist
             playlists.append(playlist)
-            entry, enum, nowtime, link=scrapelinks(playlist, links)
-            links=links+link 
-            totalnum=totalnum+enum
-            totaltime=totaltime+nowtime 
-            entries=entries+entry
+            
         else:
             break
 
@@ -146,12 +101,11 @@ while t>0:
 os.chdir(os.getcwd()+'/playlists')
 
 data={
-    'entrynum':totalnum,
-    'total time':totaltime,
     'playlist url':playlists,
-    'entries':entries,
 }
 
 jsonfile=open(playlist_name+'.json','w')
 json.dump(data,jsonfile)
 jsonfile.close()
+
+# now go and scrape all the links scrapelinks(playlistid)
