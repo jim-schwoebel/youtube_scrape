@@ -7,6 +7,13 @@ All you need to do is insert the youtube playlist name and url and it will downl
 
 These scripts are good for human-in-the-loop labeling videos on YouTube (angry, happy, sad, etc.) to be further processed by machine learning models.
 
+## Install dependencies 
+If on a linux computer:
+
+```
+sudo apt-get install youtube-dl
+```
+
 ## Making playlists
 
 To begin making a playlist:
